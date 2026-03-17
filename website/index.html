@@ -261,27 +261,38 @@
     <!-- Netlify Identity Widget - 处理用户邀请和密码重置 -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script>
-        // 检查 URL 中是否有 Identity token
+        // 检查 URL 中是否有 Identity token（包括 hash 和 query 参数）
         if (window.netlifyIdentity) {
             const hash = window.location.hash;
+            const urlParams = new URLSearchParams(window.location.search);
 
-            // 如果有邀请 token 或确认 token
-            if (hash && (hash.includes('invite_token=') || hash.includes('confirmation_token=') || hash.includes('recovery_token='))) {
+            // 检查是否有任何类型的 token（hash 或 query 参数）
+            const hasInviteToken = hash.includes('invite_token=') || hash.includes('#invite_token=') || urlParams.has('invite_token');
+            const hasConfirmToken = hash.includes('confirmation_token=') || hash.includes('#confirmation_token=') || urlParams.has('confirmation_token') || urlParams.has('token');
+            const hasRecoveryToken = hash.includes('recovery_token=') || hash.includes('#recovery_token=') || urlParams.has('recovery_token');
+
+            if (hasInviteToken || hasConfirmToken || hasRecoveryToken) {
+                console.log('检测到验证 token，打开 Identity Widget');
+
                 // 打开 Identity Widget 处理验证
                 window.netlifyIdentity.open();
 
                 // 监听验证成功
                 window.netlifyIdentity.on('login', (user) => {
                     console.log('用户验证成功:', user);
+                    // 清理 URL 中的 token 参数
+                    const cleanUrl = window.location.origin + window.location.pathname;
+                    window.history.replaceState({}, document.title, cleanUrl);
                     // 验证成功后跳转到 CMS
                     window.location.href = '/admin/';
                 });
 
                 // 监听关闭
                 window.netlifyIdentity.on('close', () => {
-                    // 如果没有登录，移除 hash 并刷新
+                    // 如果没有登录，移除 token 参数并刷新
                     if (!window.netlifyIdentity.currentUser()) {
-                        history.pushState("", document.title, window.location.pathname);
+                        const cleanUrl = window.location.origin + window.location.pathname;
+                        window.history.replaceState({}, document.title, cleanUrl);
                         window.location.reload();
                     }
                 });
