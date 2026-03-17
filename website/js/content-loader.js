@@ -1,7 +1,7 @@
 // ==================== CONTENT LOADER - DYNAMIC MARKDOWN RENDERING ====================
 
 // 配置：内容文件路径
-const CONTENT_PATH = './content/';
+const CONTENT_PATH = '../content/';
 const CONTENT_FILES = [
     { id: 'part1', file: 'part1.md', title: '技术原理' },
     { id: 'part2', file: 'part2.md', title: '工具实践' },
@@ -26,14 +26,20 @@ function getCurrentPartFromURL() {
  */
 async function loadMarkdownFile(filename) {
     try {
+        console.log('正在加载文件:', CONTENT_PATH + filename);
         const response = await fetch(CONTENT_PATH + filename);
+
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
+
         const text = await response.text();
+        console.log('✅ 文件加载成功，长度:', text.length);
         return text;
     } catch (error) {
-        console.error('Error loading markdown file:', error);
+        console.error('❌ 加载 Markdown 文件失败:', error);
+        console.error('请求路径:', CONTENT_PATH + filename);
+        console.error('当前页面路径:', window.location.pathname);
         return null;
     }
 }
@@ -232,7 +238,20 @@ async function loadContent(partId) {
     // 加载 Markdown
     const markdown = await loadMarkdownFile(contentInfo.file);
     if (!markdown) {
-        contentContainer.innerHTML = '<div class="error">内容加载失败</div>';
+        contentContainer.innerHTML = `
+            <div class="error" style="padding: 20px; background: rgba(255, 0, 0, 0.1); border: 1px solid #ff0055; border-radius: 8px; color: #ff0055;">
+                <h3>❌ 内容加载失败</h3>
+                <p><strong>尝试加载的文件：</strong>${CONTENT_PATH}${contentInfo.file}</p>
+                <p><strong>当前页面：</strong>${window.location.pathname}</p>
+                <p><strong>请确保：</strong></p>
+                <ul>
+                    <li>使用 HTTP 服务器运行（如 python -m http.server）</li>
+                    <li>不是直接双击 HTML 文件打开</li>
+                    <li>Markdown 文件存在于 website/content/ 目录</li>
+                </ul>
+                <p><strong>按 F12 打开控制台查看详细错误信息</strong></p>
+            </div>
+        `;
         return;
     }
 
