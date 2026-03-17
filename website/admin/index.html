@@ -42,16 +42,36 @@
       margin-top: 0;
       color: #00f5ff;
     }
-    .cms-info a {
+    .cms-info p {
+      color: #a0a0b0;
+      margin: 10px 0;
+    }
+    .cms-info .btn-primary {
+      background: linear-gradient(135deg, #00f5ff, #bf00ff);
+      color: #0a0a0f;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 10px;
+    }
+    .cms-info .btn-primary:hover {
+      box-shadow: 0 4px 12px rgba(0, 245, 255, 0.4);
+    }
+    .cms-info .btn-link {
+      display: inline-block;
+      margin-top: 20px;
+    }
+    .cms-info .btn-link a {
       color: #00f5ff;
       text-decoration: none;
       border: 1px solid #00f5ff;
       padding: 8px 16px;
       border-radius: 6px;
-      display: inline-block;
-      margin-top: 20px;
     }
-    .cms-info a:hover {
+    .cms-info .btn-link a:hover {
       background: #00f5ff;
       color: #0a0a0f;
     }
@@ -79,21 +99,18 @@
           <p style="font-size: 14px; color: #a0a0b0; margin: 20px 0;">
             如果你有邀请邮件，也可以直接点击邮件中的链接
           </p>
-          <button onclick="openLoginWindow()" style="
-            background: linear-gradient(135deg, #00f5ff, #bf00ff);
-            color: #0a0a0f;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            margin: 10px;
-          ">
+          <button
+            id="open-login-btn"
+            name="open-login"
+            class="btn-primary"
+            onclick="openLoginWindow()"
+            aria-label="打开登录窗口"
+          >
             打开登录窗口
           </button>
-          <br>
-          <a href="/">返回首页</a>
+          <div class="btn-link">
+            <a href="/" role="button">返回首页</a>
+          </div>
         </div>
       `;
     }
@@ -152,13 +169,15 @@
             <div class="cms-info">
               <h2>⚠️ Netlify Identity 未加载</h2>
               <p>请确保：</p>
-              <ul style="text-align: left; display: inline-block;">
+              <ul style="text-align: left; display: inline-block; padding: 0;">
                 <li>网站已部署在 Netlify 上</li>
                 <li>Netlify Identity 已启用</li>
                 <li>Git Gateway 已启用</li>
               </ul>
               <br>
-              <a href="/">返回首页</a>
+              <div class="btn-link">
+                <a href="/" role="button">返回首页</a>
+              </div>
             </div>
           `;
         }
