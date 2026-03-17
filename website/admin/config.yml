@@ -2,6 +2,9 @@ backend:
   name: git-gateway
   branch: main
 
+# 本地模式 - 可以编辑并保存到本地文件
+local_backend: true
+
 media_folder: "website/assets/images"
 public_folder: "/assets/images"
 
@@ -20,6 +23,7 @@ collections:
       - {label: "排序", name: "order", widget: "number", default: 1}
       - {label: "正文内容", name: "body", widget: "markdown"}
       - {label: "标签", name: "tags", widget: "list", default: []}
+      - {label: "发布", name: "draft", widget: "boolean", default: false}
 
   - name: "settings"
     label: "网站设置"
