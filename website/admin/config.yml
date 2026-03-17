@@ -1,18 +1,15 @@
 backend:
   name: git-gateway
   branch: main
-  repo: yulinlin-hub/vibe-coding-tutorial
+
+# Git Gateway 配置
+git_gateway: https://vibe-coding-plan.netlify.app/.netlify/git
 
 media_folder: "website/assets/images"
 public_folder: "/assets/images"
 
 site_url: https://vibe-coding-plan.netlify.app
 display_url: https://vibe-coding-plan.netlify.app
-
-# 优化配置
-slug:
-  encoding: "ascii"
-  clean_accents: true
 
 collections:
   - name: "tutorial"
@@ -27,6 +24,7 @@ collections:
       - {label: "排序", name: "order", widget: "number", default: 1}
       - {label: "正文内容", name: "body", widget: "markdown"}
       - {label: "标签", name: "tags", widget: "list", default: []}
+      - {label: "状态", name: "draft", widget: "boolean", default: false}
 
   - name: "settings"
     label: "网站设置"
