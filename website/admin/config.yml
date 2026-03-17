@@ -5,6 +5,10 @@ backend:
 media_folder: "website/assets/images"
 public_folder: "/assets/images"
 
+# Identity 配置 - 处理用户确认流程
+identity:
+  domain: vibe-coding-plan.netlify.app
+
 collections:
   - name: "tutorial"
     label: "教程章节"
