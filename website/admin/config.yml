@@ -2,9 +2,6 @@ backend:
   name: git-gateway
   branch: main
 
-# 使用本地文件模式进行测试
-local_backend: true
-
 media_folder: "website/assets/images"
 public_folder: "/assets/images"
 
