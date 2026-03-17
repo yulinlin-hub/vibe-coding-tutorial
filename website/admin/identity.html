@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>身份验证 | Vibe Coding Tutorial</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+    }
+
+    .container {
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #00f5ff, #bf00ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .message {
+      color: #a0a0b0;
+      margin-bottom: 30px;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(0, 245, 255, 0.1);
+      border-top-color: #00f5ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Netlify Identity 样式覆盖 */
+    .netlify-identity-wrapper {
+      --nc-background-color: #1a1a2e;
+      --nc-text-color: #ffffff;
+      --nc-link-color: #00f5ff;
+      --nc-input-background: #2a2a3e;
+      --nc-input-border: #3a3a4e;
+      --nc-button-background: linear-gradient(135deg, #00f5ff, #bf00ff);
+      --nc-button-text: #0a0a0f;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 Vibe Coding Tutorial</h1>
+    <p class="message">正在加载身份验证...</p>
+    <div class="loader"></div>
+  </div>
+
+  <script>
+    // 初始化 Netlify Identity
+    const netlifyIdentity = new NetlifyIdentity({
+      container: '#netlify-identity-modal',
+      locale: 'zh'
+    });
+
+    // 自动打开并处理 URL 中的 token
+    window.addEventListener('load', () => {
+      // 打开身份验证窗口
+      netlifyIdentity.open();
+
+      // 监听登录/验证成功事件
+      netlifyIdentity.on('login', (user) => {
+        console.log('登录成功:', user);
+        setTimeout(() => {
+          window.location.href = '/admin/';
+        }, 1000);
+      });
+
+      netlifyIdentity.on('close', () => {
+        // 如果用户关闭窗口且未登录，返回首页
+        if (!netlifyIdentity.currentUser()) {
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 1000);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

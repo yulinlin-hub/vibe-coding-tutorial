@@ -9,5 +9,33 @@
 <body>
   <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // 初始化 Netlify Identity
+    if (window.netlifyIdentity) {
+      const identity = window.netlifyIdentity;
+
+      // 监听登录事件
+      identity.on('init', (user) => {
+        if (!user) {
+          identity.on('login', (user) => {
+            // 登录成功后刷新页面，让 CMS 识别用户
+            window.location.href = window.location.pathname + window.location.hash + window.location.search;
+          });
+        }
+      });
+
+      // 处理邮件确认和密码重置
+      identity.on('login', (user) => {
+        console.log('User logged in:', user);
+        window.location.reload();
+      });
+
+      // 处理 URL 中的身份验证 token
+      const hash = window.location.hash;
+      if (hash && hash.includes('token')) {
+        identity.open();
+      }
+    }
+  </script>
 </body>
 </html>
