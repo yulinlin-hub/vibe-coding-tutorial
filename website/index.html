@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Coding 教程 - 从原理到实践</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Page Progress Bar -->
+    <div id="page-progress"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-rocket"></i>
+                <span>Vibe Coding</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="active">首页</a></li>
+                <li><a href="pages/part1.html">技术原理</a></li>
+                <li><a href="pages/part2.html">工具实践</a></li>
+                <li><a href="pages/part3.html">方法论</a></li>
+                <li><a href="pages/part4.html">实战项目</a></li>
+            </ul>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-bolt"></i>
+                    <span>2024 全新升级</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="gradient-text">Vibe Coding</span> 教程
+                </h1>
+                <p class="hero-subtitle">从原理到实践的完整指南</p>
+                <p class="hero-description">
+                    掌握 AI 辅助编程的核心技能，学习如何利用 ChatGPT、Claude、Cursor 等工具提升开发效率
+                </p>
+                <div class="hero-buttons">
+                    <a href="pages/part1.html" class="btn btn-primary">
+                        <i class="fas fa-play"></i> 开始学习
+                    </a>
+                    <a href="#curriculum" class="btn btn-secondary">
+                        <i class="fas fa-list"></i> 课程大纲
+                    </a>
+                </div>
+            </div>
+            <div class="hero-illustration">
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <pre class="code-content"><code><span class="keyword">const</span> vibeCoding = {
+  <span class="property">tools</span>: [<span class="string">'ChatGPT'</span>, <span class="string">'Claude'</span>, <span class="string">'Cursor'</span>],
+  <span class="property">skills</span>: [<span class="string">'提示词工程'</span>, <span class="string">'代码生成'</span>],
+  <span class="property">level</span>: <span class="string">'从入门到精通'</span>,
+  <span class="property">future</span>: <span class="string">'无限可能'</span>
+};</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特色 -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">为什么选择本教程？</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>深入原理</h3>
+                    <p>理解 AI 编程工具的技术原理，知道它们为什么能工作</p>
+                </div>
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>全面工具</h3>
+                    <p>掌握主流 AI 编程工具的使用方法和适用场景</p>
+                </div>
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>实战导向</h3>
+                    <p>通过完整项目实战，串联所有知识点</p>
+                </div>
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>最佳实践</h3>
+                    <p>学习行业最佳实践，建立高效的 AI 编程工作流</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 课程大纲 -->
+    <section id="curriculum" class="curriculum">
+        <div class="container">
+            <h2 class="section-title">课程大纲</h2>
+            <div class="timeline">
+                <div class="timeline-item fade-in-up">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h3>第一部分：Vibe Coding 的技术原理</h3>
+                        <p>理解 LLM 基础、代码生成原理、Agent 技术</p>
+                        <ul class="topic-list">
+                            <li>大语言模型（LLM）基础</li>
+                            <li>代码补全 vs 代码生成</li>
+                            <li>Agent 技术如何赋能编程</li>
+                        </ul>
+                        <a href="pages/part1.html" class="btn-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in-up">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h3>第二部分：Vibe Coding 工具全景与实践</h3>
+                        <p>掌握主流工具的核心能力与适用场景</p>
+                        <ul class="topic-list">
+                            <li>工具分类体系</li>
+                            <li>核心功能深度解析</li>
+                            <li>多工具协同工作流</li>
+                        </ul>
+                        <a href="pages/part2.html" class="btn-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in-up">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h3>第三部分：提示词工程与 Vibe Coding 方法论</h3>
+                        <p>建立一套高效的 AI 编程工作流</p>
+                        <ul class="topic-list">
+                            <li>面向代码的提示词设计</li>
+                            <li>五步核心工作流</li>
+                            <li>进阶技巧</li>
+                        </ul>
+                        <a href="pages/part3.html" class="btn-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in-up">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <h3>第四部分：实战：从零到一的完整项目</h3>
+                        <p>串联所有知识点，完成一个完整项目</p>
+                        <ul class="topic-list">
+                            <li>项目选择与规划</li>
+                            <li>分阶段实现</li>
+                            <li>问题诊断与优化</li>
+                        </ul>
+                        <a href="pages/part4.html" class="btn-link">开始学习 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 学习路径 -->
+    <section class="learning-path">
+        <div class="container">
+            <h2 class="section-title">学习路径</h2>
+            <div class="path-container">
+                <div class="path-step fade-in-up">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>理解原理</h3>
+                        <p>学习 AI 编程工具的技术基础</p>
+                    </div>
+                </div>
+                <div class="path-arrow"><i class="fas fa-chevron-right"></i></div>
+                <div class="path-step fade-in-up">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>掌握工具</h3>
+                        <p>熟悉各类 AI 编程工具的使用</p>
+                    </div>
+                </div>
+                <div class="path-arrow"><i class="fas fa-chevron-right"></i></div>
+                <div class="path-step fade-in-up">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>建立方法</h3>
+                        <p>建立高效的 AI 编程工作流</p>
+                    </div>
+                </div>
+                <div class="path-arrow"><i class="fas fa-chevron-right"></i></div>
+                <div class="path-step fade-in-up">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h3>实战项目</h3>
+                        <p>完成从零到一的完整项目</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Vibe Coding 教程</h3>
+                    <p>从原理到实践的完整指南</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="pages/part1.html">技术原理</a></li>
+                        <li><a href="pages/part2.html">工具实践</a></li>
+                        <li><a href="pages/part3.html">方法论</a></li>
+                        <li><a href="pages/part4.html">实战项目</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>相关资源</h4>
+                    <ul>
+                        <li><a href="https://platform.openai.com/docs" target="_blank">OpenAI 文档</a></li>
+                        <li><a href="https://docs.anthropic.com" target="_blank">Anthropic 文档</a></li>
+                        <li><a href="https://docs.github.com/copilot" target="_blank">GitHub Copilot</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Vibe Coding 教程. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" id="back-to-top" aria-label="返回顶部">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

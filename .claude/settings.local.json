@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pandoc:*)",
+      "Bash(python:*)",
+      "Bash(unzip:*)",
+      "Bash(start \"\" \"Vibe_Coding_教程.html\")",
+      "Bash(explorer.exe \"Vibe_Coding_教程.html\")",
+      "Bash(netstat:*)",
+      "Bash(curl:*)",
+      "Bash(git init:*)",
+      "Bash(git config:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
