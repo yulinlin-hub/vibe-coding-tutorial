@@ -1,10 +1,14 @@
 backend:
   name: git-gateway
   branch: main
-  repo: yulinlin-hub/vibe-coding-tutorial  # 添加 GitHub 仓库路径
+  repo: yulinlin-hub/vibe-coding-tutorial
 
 media_folder: "website/assets/images"
 public_folder: "/assets/images"
+
+# 添加调试配置
+site_url: https://vibe-coding-plan.netlify.app
+display_url: https://vibe-coding-plan.netlify.app
 
 collections:
   - name: "tutorial"
