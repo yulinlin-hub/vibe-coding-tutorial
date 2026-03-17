@@ -257,5 +257,36 @@
     </button>
 
     <script src="js/main.js"></script>
+
+    <!-- Netlify Identity Widget - 处理用户邀请和密码重置 -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+        // 检查 URL 中是否有 Identity token
+        if (window.netlifyIdentity) {
+            const hash = window.location.hash;
+
+            // 如果有邀请 token 或确认 token
+            if (hash && (hash.includes('invite_token=') || hash.includes('confirmation_token=') || hash.includes('recovery_token='))) {
+                // 打开 Identity Widget 处理验证
+                window.netlifyIdentity.open();
+
+                // 监听验证成功
+                window.netlifyIdentity.on('login', (user) => {
+                    console.log('用户验证成功:', user);
+                    // 验证成功后跳转到 CMS
+                    window.location.href = '/admin/';
+                });
+
+                // 监听关闭
+                window.netlifyIdentity.on('close', () => {
+                    // 如果没有登录，移除 hash 并刷新
+                    if (!window.netlifyIdentity.currentUser()) {
+                        history.pushState("", document.title, window.location.pathname);
+                        window.location.reload();
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 </html>
