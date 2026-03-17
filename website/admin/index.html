@@ -10,6 +10,7 @@
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0f;
     }
     #loading {
       position: fixed;
@@ -25,6 +26,35 @@
       font-size: 18px;
       z-index: 9999;
     }
+    .cms-info {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #fff;
+      padding: 40px;
+      background: #1a1a2e;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 245, 255, 0.2);
+    }
+    .cms-info h2 {
+      margin-top: 0;
+      color: #00f5ff;
+    }
+    .cms-info a {
+      color: #00f5ff;
+      text-decoration: none;
+      border: 1px solid #00f5ff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-top: 20px;
+    }
+    .cms-info a:hover {
+      background: #00f5ff;
+      color: #0a0a0f;
+    }
   </style>
 </head>
 <body>
@@ -33,82 +63,107 @@
   <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
-    // 移除加载提示
+    // 全局变量
+    let identityInitialized = false;
+
     function hideLoading() {
       const loading = document.getElementById('loading');
       if (loading) loading.remove();
     }
 
-    // 初始化 Netlify Identity
-    if (window.netlifyIdentity) {
-      const identity = window.netlifyIdentity;
-
-      // 监听初始化事件
-      identity.on('init', (user) => {
-        console.log('Identity initialized:', user);
-
-        if (!user) {
-          // 未登录，打开登录窗口
-          console.log('No user found, opening login...');
-          identity.open();
-
-          // 监听登录成功
-          identity.on('login', (loggedInUser) => {
-            console.log('User logged in:', loggedInUser);
-            hideLoading();
-            window.location.reload();
-          });
-
-          // 监听关闭
-          identity.on('close', () => {
-            if (!identity.currentUser()) {
-              console.log('Login dialog closed without login');
-              // 显示提示
-              document.body.innerHTML = `
-                <div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0a0a0f;color:#fff;text-align:center;">
-                  <div>
-                    <h2>需要登录才能访问 CMS</h2>
-                    <p>请检查你的邮箱，找到邀请邮件并点击其中的链接。</p>
-                    <p>或者<a href="/" style="color:#00f5ff;">返回首页</a></p>
-                  </div>
-                </div>
-              `;
-            }
-          });
-        } else {
-          // 已登录
-          console.log('User already logged in:', user);
-          hideLoading();
-        }
-      });
-
-      // 处理登录事件
-      identity.on('login', (user) => {
-        console.log('Login event:', user);
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-      });
-
-      // 处理登出事件
-      identity.on('logout', () => {
-        console.log('User logged out');
-        window.location.reload();
-      });
-    } else {
-      // Identity widget 未加载
-      console.error('Netlify Identity widget not loaded');
+    function showLoginInfo() {
       document.body.innerHTML = `
-        <div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0a0a0f;color:#fff;text-align:center;padding:20px;">
-          <div>
-            <h2>⚠️ Netlify Identity 未加载</h2>
-            <p>请确保你的网站部署在 Netlify 上。</p>
-            <p>如果你是开发者，请检查 Netlify Identity 是否已启用。</p>
-            <p style="margin-top:20px;"><a href="/" style="color:#00f5ff;">返回首页</a></p>
-          </div>
+        <div class="cms-info">
+          <h2>🔐 CMS 管理后台需要登录</h2>
+          <p>请点击下方按钮打开登录窗口</p>
+          <p style="font-size: 14px; color: #a0a0b0; margin: 20px 0;">
+            如果你有邀请邮件，也可以直接点击邮件中的链接
+          </p>
+          <button onclick="openLoginWindow()" style="
+            background: linear-gradient(135deg, #00f5ff, #bf00ff);
+            color: #0a0a0f;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+          ">
+            打开登录窗口
+          </button>
+          <br>
+          <a href="/">返回首页</a>
         </div>
       `;
     }
+
+    function openLoginWindow() {
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.open();
+      }
+    }
+
+    // 等待页面完全加载
+    window.addEventListener('load', function() {
+      // 等待一小会儿确保 Identity widget 加载完成
+      setTimeout(function() {
+        if (window.netlifyIdentity) {
+          const identity = window.netlifyIdentity;
+
+          // 监听初始化
+          identity.on('init', function(user) {
+            console.log('Identity initialized:', user);
+            identityInitialized = true;
+
+            if (user) {
+              // 用户已登录
+              console.log('User logged in:', user.email);
+              hideLoading();
+            } else {
+              // 用户未登录
+              console.log('No user logged in');
+              hideLoading();
+              showLoginInfo();
+            }
+          });
+
+          // 监听登录成功
+          identity.on('login', function(user) {
+            if (user) {
+              console.log('User logged in:', user.email);
+              // 登录成功，刷新页面让 CMS 识别
+              setTimeout(function() {
+                window.location.reload();
+              }, 1000);
+            }
+          });
+
+          // 监听登出
+          identity.on('logout', function() {
+            console.log('User logged out');
+            window.location.reload();
+          });
+
+        } else {
+          // Identity widget 未加载
+          console.error('Netlify Identity widget not loaded');
+          document.body.innerHTML = `
+            <div class="cms-info">
+              <h2>⚠️ Netlify Identity 未加载</h2>
+              <p>请确保：</p>
+              <ul style="text-align: left; display: inline-block;">
+                <li>网站已部署在 Netlify 上</li>
+                <li>Netlify Identity 已启用</li>
+                <li>Git Gateway 已启用</li>
+              </ul>
+              <br>
+              <a href="/">返回首页</a>
+            </div>
+          `;
+        }
+      }, 500);
+    });
   </script>
 </body>
 </html>
