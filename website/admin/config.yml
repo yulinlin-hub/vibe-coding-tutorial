@@ -19,12 +19,12 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "标题", name: "title", widget: "string"}
-      - {label: "描述", name: "description", widget: "string"}
-      - {label: "排序", name: "order", widget: "number", default: 1}
-      - {label: "正文内容", name: "body", widget: "markdown"}
-      - {label: "标签", name: "tags", widget: "list", default: []}
-      - {label: "状态", name: "draft", widget: "boolean", default: false}
+      - {label: "标题", name: "title", widget: "string", required: true}
+      - {label: "描述", name: "description", widget: "string", required: false}
+      - {label: "排序", name: "order", widget: "number", default: 1, required: false}
+      - {label: "正文内容", name: "body", widget: "markdown", required: true}
+      - {label: "标签", name: "tags", widget: "list", default: [], required: false}
+      - {label: "状态", name: "draft", widget: "boolean", default: false, required: false}
 
   - name: "settings"
     label: "网站设置"
@@ -33,6 +33,6 @@ collections:
         label: "通用设置"
         file: "website/content/settings.md"
         fields:
-          - {label: "网站标题", name: "site_title", widget: "string"}
-          - {label: "网站描述", name: "site_description", widget: "string"}
-          - {label: "作者", name: "author", widget: "string"}
+          - {label: "网站标题", name: "site_title", widget: "string", required: true}
+          - {label: "网站描述", name: "site_description", widget: "string", required: false}
+          - {label: "作者", name: "author", widget: "string", required: false}
