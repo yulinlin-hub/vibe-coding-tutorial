@@ -1,8 +1,11 @@
 ---
-title: "第一部分：Vibe Coding 的技术原理"
-description: "理解'为什么AI能帮我写代码'"
+title: 第一部分：Vibe Coding 的技术原理
+description: 为什么AI能帮我写代码
 order: 1
-tags: ["技术原理", "LLM", "AI基础"]
+tags:
+  - 技术原理
+  - LLM
+  - AI基础
 ---
 
 ## 第一部分：Vibe Coding 的技术原理
