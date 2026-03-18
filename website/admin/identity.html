@@ -77,29 +77,41 @@
   <script>
     // 初始化 Netlify Identity
     const netlifyIdentity = new NetlifyIdentity({
-      container: '#netlify-identity-modal',
       locale: 'zh'
     });
 
     // 自动打开并处理 URL 中的 token
     window.addEventListener('load', () => {
-      // 打开身份验证窗口
-      netlifyIdentity.open();
+      console.log('Identity 页面加载完成，URL:', window.location.href);
+
+      // 延迟打开以确保 widget 完全初始化
+      setTimeout(() => {
+        // 打开身份验证窗口
+        netlifyIdentity.open();
+        console.log('Identity Widget 已打开');
+      }, 500);
 
       // 监听登录/验证成功事件
       netlifyIdentity.on('login', (user) => {
-        console.log('登录成功:', user);
+        console.log('登录/验证成功:', user);
+
+        // 清理 URL 中的 token 参数
+        const cleanUrl = window.location.origin + '/admin/';
+        window.history.replaceState({}, document.title, cleanUrl);
+
         setTimeout(() => {
           window.location.href = '/admin/';
-        }, 1000);
+        }, 1500);
       });
 
       netlifyIdentity.on('close', () => {
+        console.log('Identity Widget 关闭');
         // 如果用户关闭窗口且未登录，返回首页
         if (!netlifyIdentity.currentUser()) {
+          console.log('用户未登录，返回首页');
           setTimeout(() => {
             window.location.href = '/';
-          }, 1000);
+          }, 500);
         }
       });
     });
