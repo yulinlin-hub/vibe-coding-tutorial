@@ -4,10 +4,6 @@
   publish = "website"
   command = ""
 
-# Netlify Identity 配置
-[identity]
-  enabled = true
-
 # 重定向规则
 # 1. 静态资源不重定向
 [[redirects]]
