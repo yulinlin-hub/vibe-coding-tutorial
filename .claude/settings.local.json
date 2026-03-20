@@ -19,7 +19,8 @@
       "Bash(ping:*)",
       "Bash(git remote remove:*)",
       "Bash(echo:*)",
-      "Bash(del:*)"
+      "Bash(del:*)",
+      "Bash(wc:*)"
     ]
   }
 }

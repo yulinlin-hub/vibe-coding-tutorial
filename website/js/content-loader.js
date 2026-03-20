@@ -3,6 +3,7 @@
 // 配置：内容文件路径
 const CONTENT_PATH = '../content/';
 const CONTENT_FILES = [
+    { id: 'part0', file: 'part0.md', title: '序言' },
     { id: 'part1', file: 'part1.md', title: '技术原理' },
     { id: 'part2', file: 'part2.md', title: '工具实践' },
     { id: 'part3', file: 'part3.md', title: '方法论' },
