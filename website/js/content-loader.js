@@ -26,8 +26,11 @@ function getCurrentPartFromURL() {
  */
 async function loadMarkdownFile(filename) {
     try {
-        console.log('正在加载文件:', CONTENT_PATH + filename);
-        const response = await fetch(CONTENT_PATH + filename);
+        // 添加时间戳防止缓存
+        const timestamp = new Date().getTime();
+        const url = `${CONTENT_PATH}${filename}?v=${timestamp}`;
+        console.log('正在加载文件:', url);
+        const response = await fetch(url);
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
